@@ -4,7 +4,7 @@ const uuid = require('uuid').v4;
 const moment = require('moment');
 var admisiones = require('../models/modelogenerico');
 var pathDef = "/api/admisiones";
-var NombreTabla = "Pacientes";
+var NombreTabla = "Admisiones";
 
 //exportar modulo
 module.exports = [
