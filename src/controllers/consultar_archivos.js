@@ -8,9 +8,16 @@ var pathDef = "/api/archivos";
 var NombreTabla = "Archivos";
 dotenv.config();
 
-const S3 = new AWS.S3({ apiVersion: '2012-10-17' });
+//const S3 = new AWS.S3({ apiVersion: '2012-10-17' });
 
-//exportar modulo
+const S3 = new AWS.S3({
+    credentials: {
+        //region: process.env.AWS_REGION,
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    }
+});
+
 module.exports = [
     {
         method: 'POST',
