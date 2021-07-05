@@ -31,7 +31,7 @@ module.exports = [
                 var parametros = {
                     TableName: NombreTabla,
                     "ScanIndexForward": true,
-                    FilterExpression: "#Fecha BETWEEN :FechaInicial AND :FechaFinal AND #Area = :Area AND #Documento = :Documento AND #IdentificacionPte = :IdentificacionPte AND #Admision = :Admision AND #Administradora = :Administradora AND #UnidadFuncional = :UnidadFuncional OR contains(#NombreArchivo, :NombreArchivo)",
+                    FilterExpression: "#Fecha BETWEEN :FechaInicial AND :FechaFinal AND #Area = :Area AND #Documento = :Documento AND #IdentificacionPte = :IdentificacionPte AND #Admision = :Admision AND #Administradora = :Administradora AND #UnidadFuncional = :UnidadFuncional AND contains(#NombreArchivo, :NombreArchivo)",
                     ExpressionAttributeNames: {
                         "#Fecha": "FormatoFecha",
                         "#Area": "CodigoArea",
