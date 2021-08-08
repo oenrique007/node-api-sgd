@@ -50,15 +50,15 @@ module.exports = [
                 let bucketDefinitivo = body.BucketDefinitivo;
                 //let Year = moment().format("YYYY");
                 //var Mes = moment().format('MMMM');
-                let getFechaHora = moment().format("YYYYMMDD HH_mm_ss");
+                let getFechaHora = moment().format("YYYYMMDD_HH_mm_ss");
 
                 let myFile = req.file.originalname.split(".");
                 const fileType = myFile[myFile.length - 1];
-                let fileNameComplete = req.file.originalname;
+                let fileNameComplete = req.file.originalname.replace(" ", "_");
                 let BucketComplete = "";
 
                 if (body.Estructura == 3) {
-                    fileNameComplete = "RC_" + IdentificacionPte + "_" + NombrePaciente + "_" + Administradora + "_" + getFechaHora + "." + fileType;
+                    fileNameComplete = "RC_" + IdentificacionPte + "_" + NombrePaciente.replace(" ", "_") + "_" + Administradora.replace(" ", "_") + "_" + getFechaHora + "." + fileType;
                 }
 
                 const params = {
