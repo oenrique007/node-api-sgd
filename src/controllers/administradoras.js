@@ -9,7 +9,7 @@ var NombreTabla = "Administradoras";
 //exportar modulo
 module.exports = [
     {
-        method: 'GET',
+        method: 'POST',
         path: `${pathDef}/todos`,
         description: 'Consultar todas las administradoras',
         handler: function (req, res) {
