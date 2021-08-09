@@ -150,4 +150,74 @@ module.exports = [
             }
         }
     },
+    {
+        method: 'PUT',
+        path: `${pathDef}/actualizar`,
+        description: 'Actualizar una unidad funcional',
+        handler: function (req, res) {
+            try {
+
+                let body = req.body;
+                let getFechaHora = moment().format("DD/MM/YYYY HH:mm:ss");
+                var parametros = {
+                    TableName: NombreTabla,
+                    Key: {
+                        Id: body.Id
+                    },
+                    UpdateExpression: `SET #Descripcion = :Descripcion`,
+
+                    ExpressionAttributeNames: {
+                        "#Descripcion": "Descripcion"
+                    },
+                    ExpressionAttributeValues: {
+                        ":Descripcion": body.Descripcion
+                    },
+                    ReturnValues: 'UPDATED_NEW'
+                };
+
+                unidades_funcionales.postActualizarDatos(parametros, function (error, data) {
+                    if (error) {
+                        res.status(500).jsonp({ mensaje: error });
+                    }
+                    else {
+                        res.status(200).jsonp(data);
+                    }
+                });
+
+            } catch (error) {
+                console.log(error);
+                res.status(500).jsonp({ mensaje: error });
+            }
+        }
+    },
+    {
+        method: 'DELETE',
+        path: `${pathDef}/eliminar`,
+        description: 'Eliminar una unidad funcional',
+        handler: function (req, res) {
+            try {
+
+                let body = req.body;
+                var parametros = {
+                    TableName: NombreTabla,
+                    Key: {
+                        Id: body.Id
+                    }
+                };
+
+                unidades_funcionales.postEliminarDatos(parametros, function (error, data) {
+                    if (error) {
+                        res.status(500).jsonp({ mensaje: error });
+                    }
+                    else {
+                        res.status(200).jsonp(data);
+                    }
+                });
+
+            } catch (error) {
+                console.log(error);
+                res.status(500).jsonp({ mensaje: error });
+            }
+        }
+    }
 ];
