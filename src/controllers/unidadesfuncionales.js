@@ -9,7 +9,7 @@ var NombreTabla = "UnidadesFuncionales";
 //exportar modulo
 module.exports = [
     {
-        method: 'POST',
+        method: 'GET',
         path: `${pathDef}/todos`,
         description: 'Consultar todas las unidades funcionales',
         handler: function (req, res) {
