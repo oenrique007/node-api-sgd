@@ -48,9 +48,9 @@ module.exports = [
                     "TableName": "DocumentosAreas",
                     "ScanIndexForward": true,
                     "Limit": 100,
-                    "FilterExpression": "#DYNOBASE_Area = :Area",
+                    "FilterExpression": "#DYNOBASE_CodigoArea = :Area",
                     "ExpressionAttributeNames": {
-                        "#DYNOBASE_Area": "Area"
+                        "#DYNOBASE_CodigoArea": "Area"
                     },
                     "ExpressionAttributeValues": {
                         ":Area": Area
@@ -90,12 +90,13 @@ module.exports = [
                         //'Obligatorio': { S: `${body.Obligatorio}` },
                         //'CodigoArea': { S: `${body.CodigoArea}` },
                         //'NombreArea': { S: `${body.NombreArea}` },
-                        //'Archivo': { S: '' },
-                        //'File': { S: '' },
+                        'Archivo': { S: '' },
+                        'File': { S: '' },
                         'UsuarioCreacion': { S: `${body.Usuario}` },
                         'UsuarioModificacion': { S: `${body.Usuario}` },
                         'FechaCreacion': { S: `${getFechaHora}` },
                         'FechaModificacion': { S: `${getFechaHora}` },
+
                     }
                 };
                 documentos.postInsertarDatos(parametros, function (error, data) {
@@ -127,7 +128,7 @@ module.exports = [
                     Key: {
                         Id: body.Id
                     },
-                    UpdateExpression: `SET #Nombre = :Nombre,
+                    UpdateExpression: `SET #Nombre = :Nombre,                                          
                                           #UsuarioModificacion = :UsuarioModificacion,
                                           #FechaModificacion = :FechaModificacion`,
                     ExpressionAttributeNames: {
