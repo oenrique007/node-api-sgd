@@ -45,7 +45,7 @@ module.exports = [
                 let Area = req.params.Area;
                 //let getFechaHora = moment().format("DD/MM/YYYY HH:mm:ss");
                 var parametros = {
-                    "TableName": NombreTabla,
+                    "TableName": "DocumentosAreas",
                     "ScanIndexForward": true,
                     "Limit": 100,
                     "FilterExpression": "#DYNOBASE_CodigoArea = :CodigoArea",
@@ -87,16 +87,15 @@ module.exports = [
                         'Id': { S: `${uuid()}` },
                         'Codigo': { S: `${body.Codigo}` },
                         'Nombre': { S: `${body.Nombre}` },
-                        'Obligatorio': { S: `${body.Obligatorio}` },
-                        'CodigoArea': { S: `${body.CodigoArea}` },
-                        'NombreArea': { S: `${body.NombreArea}` },
-                        'Archivo': { S: '' },
-                        'File': { S: '' },
+                        //'Obligatorio': { S: `${body.Obligatorio}` },
+                        //'CodigoArea': { S: `${body.CodigoArea}` },
+                        //'NombreArea': { S: `${body.NombreArea}` },
+                        //'Archivo': { S: '' },
+                        //'File': { S: '' },
                         'UsuarioCreacion': { S: `${body.Usuario}` },
                         'UsuarioModificacion': { S: `${body.Usuario}` },
                         'FechaCreacion': { S: `${getFechaHora}` },
                         'FechaModificacion': { S: `${getFechaHora}` },
-
                     }
                 };
                 documentos.postInsertarDatos(parametros, function (error, data) {
@@ -128,25 +127,16 @@ module.exports = [
                     Key: {
                         Id: body.Id
                     },
-                    UpdateExpression: `SET #Nombre = :Nombre, 
-                                          #Obligatorio = :Obligatorio,
-                                          #CodigoArea = :CodigoArea,
-                                          #NombreArea = :NombreArea,
+                    UpdateExpression: `SET #Nombre = :Nombre,
                                           #UsuarioModificacion = :UsuarioModificacion,
                                           #FechaModificacion = :FechaModificacion`,
                     ExpressionAttributeNames: {
                         "#Nombre": "Nombre",
-                        "#Obligatorio": "Obligatorio",
-                        "#CodigoArea": "CodigoArea",
-                        "#NombreArea": "NombreArea",
                         "#UsuarioModificacion": "UsuarioModificacion",
                         "#FechaModificacion": "FechaModificacion"
                     },
                     ExpressionAttributeValues: {
                         ":Nombre": body.Nombre,
-                        ":Obligatorio": body.Obligatorio,
-                        ":CodigoArea": body.CodigoArea,
-                        ":NombreArea": body.NombreArea,
                         ":UsuarioModificacion": body.Usuario,
                         ":FechaModificacion": getFechaHora
                     },
