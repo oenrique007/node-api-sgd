@@ -50,7 +50,7 @@ module.exports = [
                     "Limit": 100,
                     "FilterExpression": "#DYNOBASE_Area = :Area",
                     "ExpressionAttributeNames": {
-                        "#DYNOBASE_CodigoArea": "Area"
+                        "#DYNOBASE_Area": "Area"
                     },
                     "ExpressionAttributeValues": {
                         ":Area": Area
