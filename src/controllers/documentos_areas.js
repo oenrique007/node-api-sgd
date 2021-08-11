@@ -52,6 +52,8 @@ module.exports = [
                         'NombreDocumento': { S: `${body.NombreDocumento}` },
                         'Area': { S: `${body.CodigoArea}` },
                         'NombreArea': { S: `${body.NombreArea}` },
+                        'Archivo': { S: '' },
+                        'File': { S: '' },
                         'UsuarioCreacion': { S: `${body.UsuarioCreacion}` },
                         'FechaCreacion': { S: `${getFechaHora}` }
                     }
