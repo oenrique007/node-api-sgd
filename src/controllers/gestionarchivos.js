@@ -58,7 +58,7 @@ module.exports = [
                 let BucketComplete = "";
 
                 if (body.Estructura == 3) {
-                    fileNameComplete = "RC_" + IdentificacionPte + "_" + NombrePaciente + "_" + Administradora + "_" + getFechaHora + "." + fileType;
+                    fileNameComplete = "DOC_" + IdentificacionPte + "_" + NombrePaciente + "_" + Administradora + "_" + getFechaHora + "." + fileType;
                 }
 
                 const params = {
