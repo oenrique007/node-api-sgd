@@ -48,12 +48,12 @@ module.exports = [
                     "TableName": "DocumentosAreas",
                     "ScanIndexForward": true,
                     "Limit": 100,
-                    "FilterExpression": "#DYNOBASE_CodigoArea = :CodigoArea",
+                    "FilterExpression": "#DYNOBASE_Area = :Area",
                     "ExpressionAttributeNames": {
-                        "#DYNOBASE_CodigoArea": "CodigoArea"
+                        "#DYNOBASE_CodigoArea": "Area"
                     },
                     "ExpressionAttributeValues": {
-                        ":CodigoArea": Area
+                        ":Area": Area
                     }
                 };
 
