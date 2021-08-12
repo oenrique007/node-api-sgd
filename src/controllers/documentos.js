@@ -1,7 +1,7 @@
 //dependencias
 const AWS = require('aws-sdk');
 const uuid = require('uuid').v4;
-const moment = require('moment');
+const moment = require('moment-timezone');
 var documentos = require('../models/modelogenerico');
 var pathDef = "/api/documentos";
 var NombreTabla = "Documentos";
@@ -80,7 +80,7 @@ module.exports = [
             try {
 
                 let body = req.body;
-                let getFechaHora = moment().format("DD/MM/YYYY HH:mm:ss");
+                let getFechaHora = moment().tz("America/Bogota").format("DD/MM/YYYY HH:mm:ss");
                 var parametros = {
                     TableName: NombreTabla,
                     Item: {
@@ -120,7 +120,7 @@ module.exports = [
             try {
 
                 let body = req.body;
-                let getFechaHora = moment().format("DD/MM/YYYY HH:mm:ss");
+                let getFechaHora = moment().tz("America/Bogota").format("DD/MM/YYYY HH:mm:ss");
                 var parametros = {
                     TableName: NombreTabla,
                     Key: {
