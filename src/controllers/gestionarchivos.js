@@ -7,7 +7,7 @@ const moment = require('moment');
 var pathDef = "/api/archivos";
 var archivos = require('../models/modelogenerico');
 dotenv.config();
-
+moment.tz.setDefault("America/Bogota");
 // const S3 = new AWS.S3({
 //     credentials: {
 //         region: process.env.AWS_REGION,
@@ -50,7 +50,7 @@ module.exports = [
                 let bucketDefinitivo = body.BucketDefinitivo;
                 //let Year = moment().format("YYYY");
                 //var Mes = moment().format('MMMM');
-                let getFechaHora = moment().local().format("YYYYMMDD HH_mm_ss");
+                let getFechaHora = moment().format("YYYYMMDD HH_mm_ss");
 
                 let myFile = req.file.originalname.split(".");
                 const fileType = myFile[myFile.length - 1];
@@ -75,8 +75,8 @@ module.exports = [
                         return;
                     } else {
 
-                        let getFechaHora = moment().local().format("DD/MM/YYYY HH:mm:ss");
-                        let getFechaHoraFormato = moment().local().format("YYYY-MM-DD");
+                        let getFechaHora = moment().format("DD/MM/YYYY HH:mm:ss");
+                        let getFechaHoraFormato = moment().format("YYYY-MM-DD");
                         var parametros = {
                             TableName: 'Archivos',
                             Item: {
