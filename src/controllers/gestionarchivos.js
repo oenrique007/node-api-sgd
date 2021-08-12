@@ -51,7 +51,7 @@ module.exports = [
                 let bucketDefinitivo = body.BucketDefinitivo;
                 //let Year = moment().format("YYYY");
                 //var Mes = moment().format('MMMM');
-                let getFechaHora = moment().tz('America/Bogota').format("YYYYMMDD HH_mm_ss");
+                let getFechaHora = moment().format("YYYYMMDD HH_mm_ss");
 
                 let myFile = req.file.originalname.split(".");
                 const fileType = myFile[myFile.length - 1];
@@ -76,8 +76,8 @@ module.exports = [
                         return;
                     } else {
 
-                        let getFechaHora = moment().tz('America/Bogota').format("DD/MM/YYYY HH:mm:ss");
-                        let getFechaHoraFormato = moment().tz('America/Bogota').format("YYYY-MM-DD");
+                        let getFechaHora = moment().format("DD/MM/YYYY HH:mm:ss");
+                        let getFechaHoraFormato = moment().format("YYYY-MM-DD");
                         var parametros = {
                             TableName: 'Archivos',
                             Item: {
