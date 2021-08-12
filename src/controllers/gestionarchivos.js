@@ -7,7 +7,7 @@ const moment = require('moment');
 var pathDef = "/api/archivos";
 var archivos = require('../models/modelogenerico');
 dotenv.config();
-moment.tz.setDefault("America/Bogota");
+//moment.tz.setDefault("America/Bogota");
 // const S3 = new AWS.S3({
 //     credentials: {
 //         region: process.env.AWS_REGION,
