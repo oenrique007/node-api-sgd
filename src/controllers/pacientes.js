@@ -166,7 +166,7 @@ module.exports = [
             try {
 
                 let body = req.body;
-                let getFechaHora = moment().tz("America/Bogota").format("DD/MM/YYYY HH:mm:ss");
+                //let getFechaHora = moment().tz("America/Bogota").format("DD/MM/YYYY HH:mm:ss");
                 var parametros = {
                     TableName: NombreTabla,
                     Key: {
@@ -174,7 +174,7 @@ module.exports = [
                     },
                     UpdateExpression: `SET #Tipo = :Tipo,                                          
                                           #Nombres = :Nombres,
-                                          #Sexo = :Sexo
+                                          #Sexo = :Sexo,
                                           #FechaNac = :FechaNac,
                                           #Direccion = :Direccion,
                                           #Telefonos = :Telefonos,
