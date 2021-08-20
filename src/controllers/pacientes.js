@@ -158,4 +158,93 @@ module.exports = [
             }
         }
     },
+    {
+        method: 'PUT',
+        path: `${pathDef}/actualizar`,
+        description: 'Actualizar datos de un paciente',
+        handler: function (req, res) {
+            try {
+
+                let body = req.body;
+                let getFechaHora = moment().tz("America/Bogota").format("DD/MM/YYYY HH:mm:ss");
+                var parametros = {
+                    TableName: NombreTabla,
+                    Key: {
+                        Id: body.Id
+                    },
+                    UpdateExpression: `SET #Tipo = :Tipo,                                          
+                                          #Nombres = :Nombres,
+                                          #Sexo = :Sexo
+                                          #FechaNac = :FechaNac,
+                                          #Direccion = :Direccion,
+                                          #Telefonos = :Telefonos,
+                                          #Email = :Email,
+                                          #Nivel = :Nivel`,
+                    ExpressionAttributeNames: {
+                        "#Tipo": "Tipo",
+                        "#Nombres": "Nombres",
+                        "#Sexo": "Sexo",
+                        "#FechaNac": "FechaNac",
+                        "#Direccion": "Direccion",
+                        "#Telefonos": "Telefonos",
+                        "#Email": "Email",
+                        "#Nivel": "Nivel"
+                    },
+                    ExpressionAttributeValues: {
+                        ":Tipo": body.Tipo,
+                        ":Nombres": body.Nombres,
+                        ":Sexo": body.Sexo,
+                        ":FechaNac": body.FechaNac,
+                        ":Direccion": body.Direccion,
+                        ":Telefonos": body.Telefonos,
+                        ":Email": body.Email,
+                        ":Nivel": body.Nivel
+                    },
+                    ReturnValues: 'UPDATED_NEW'
+                };
+
+                pacientes.postActualizarDatos(parametros, function (error, data) {
+                    if (error) {
+                        res.status(500).jsonp({ mensaje: error });
+                    }
+                    else {
+                        res.status(200).jsonp(data);
+                    }
+                });
+
+            } catch (error) {
+                console.log(error);
+                res.status(500).jsonp({ mensaje: error });
+            }
+        }
+    },
+    {
+        method: 'DELETE',
+        path: `${pathDef}/eliminar`,
+        description: 'Eliminar registro del paciente',
+        handler: function (req, res) {
+            try {
+
+                let body = req.body;
+                var parametros = {
+                    TableName: NombreTabla,
+                    Key: {
+                        Id: body.Id
+                    }
+                };
+                pacientes.postEliminarDatos(parametros, function (error, data) {
+                    if (error) {
+                        res.status(500).jsonp({ mensaje: error });
+                    }
+                    else {
+                        res.status(200).jsonp(data);
+                    }
+                });
+
+            } catch (error) {
+                console.log(error);
+                res.status(500).jsonp({ mensaje: error });
+            }
+        }
+    }
 ];
