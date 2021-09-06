@@ -18,7 +18,7 @@ module.exports = [
                 var parametros = {
                     "TableName": NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 100,
+                    "Limit": 5000,
                     "FilterExpression": "#DYNOBASE_Identificacion = :Identificacion",
                     "ExpressionAttributeNames": {
                         "#DYNOBASE_Identificacion": "Identificacion"

@@ -45,7 +45,7 @@ module.exports = [
                 var parametros = {
                     TableName: NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 100,
+                    "Limit": 5000,
                     "FilterExpression": "#DYNOBASE_Codigo = :Codigo",
                     "ExpressionAttributeNames": {
                         "#DYNOBASE_Codigo": "Codigo"

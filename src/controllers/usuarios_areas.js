@@ -47,7 +47,7 @@ module.exports = [
                 var parametros = {
                     "TableName": NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 100,
+                    "Limit": 5000,
                     "FilterExpression": "#DYNOBASE_UsuarioCognito = :UsuarioCognito",
                     "ExpressionAttributeNames": {
                         "#DYNOBASE_UsuarioCognito": "UsuarioCognito"

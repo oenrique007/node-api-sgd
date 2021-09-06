@@ -20,7 +20,7 @@ module.exports = [
                 var parametros = {
                     "TableName": NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 100
+                    "Limit": 500
                 };
 
                 unidades_funcionales.postConsultarScanDatos(parametros, function (error, data) {
@@ -53,7 +53,7 @@ module.exports = [
                 var parametros = {
                     "TableName": NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 100,
+                    "Limit": 500,
                     "FilterExpression": "contains(#DYNOBASE_Descripcion, :Descripcion) OR contains(#DYNOBASE_Codigo, :Codigo)",
                     "ExpressionAttributeNames": {
                         "#DYNOBASE_Descripcion": "Descripcion",
@@ -92,7 +92,7 @@ module.exports = [
                 var parametros = {
                     "TableName": NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 100,
+                    "Limit": 500,
                     "FilterExpression": "#DYNOBASE_Codigo = :Codigo",
                     "ExpressionAttributeNames": {
                         "#DYNOBASE_Codigo": "Codigo"

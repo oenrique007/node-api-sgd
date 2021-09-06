@@ -47,7 +47,7 @@ module.exports = [
                 var parametros = {
                     "TableName": "DocumentosAreas",
                     "ScanIndexForward": true,
-                    "Limit": 100,
+                    "Limit": 10000,
                     "FilterExpression": "#DYNOBASE_CodigoArea = :Area",
                     "ExpressionAttributeNames": {
                         "#DYNOBASE_CodigoArea": "Area"
