@@ -17,6 +17,7 @@ module.exports = [
 
                 var parametros = {};
                 let body = req.body;
+                let Referencia = req.body.Referencia;
 
                 if (Referencia != "" || Referencia != undefined || Referencia != null) {
                     parametros = {
