@@ -113,7 +113,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: `${pathDef}/factura`,
+        path: `${pathDef}/codigo`,
         description: 'Consultar factura x filtro',
         handler: function (req, res) {
             try {
@@ -126,14 +126,14 @@ module.exports = [
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
-                        "Limit": 360000,
+                        "Limit": 1000,
                         "FilterExpression": "#DYNOBASE_Factura, :Factura AND #DYNOBASE_Identificacion = :Identificacion",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Factura": "Factura",
                             "#DYNOBASE_Identificacion": "Identificacion"
                         },
                         "ExpressionAttributeValues": {
-                            ":Factura": Filtro,
+                            ":Factura": Factura,
                             ":Identificacion": Referencia
                         }
                     };
