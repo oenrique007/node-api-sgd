@@ -87,9 +87,7 @@ module.exports = [
                         'Id': { S: `${uuid()}` },
                         'Codigo': { S: `${body.Codigo}` },
                         'Nombre': { S: `${body.Nombre}` },
-                        //'Obligatorio': { S: `${body.Obligatorio}` },
-                        //'CodigoArea': { S: `${body.CodigoArea}` },
-                        //'NombreArea': { S: `${body.NombreArea}` },                        
+                        'Soporte': { S: `${body.Soporte}` },
                         'UsuarioCreacion': { S: `${body.Usuario}` },
                         'UsuarioModificacion': { S: `${body.Usuario}` },
                         'FechaCreacion': { S: `${getFechaHora}` },
@@ -126,16 +124,19 @@ module.exports = [
                     Key: {
                         Id: body.Id
                     },
-                    UpdateExpression: `SET #Nombre = :Nombre,                                          
+                    UpdateExpression: `SET #Nombre = :Nombre,
+                                          #Soporte = :Soporte,
                                           #UsuarioModificacion = :UsuarioModificacion,
                                           #FechaModificacion = :FechaModificacion`,
                     ExpressionAttributeNames: {
                         "#Nombre": "Nombre",
+                        "#Soporte": "Soporte",
                         "#UsuarioModificacion": "UsuarioModificacion",
                         "#FechaModificacion": "FechaModificacion"
                     },
                     ExpressionAttributeValues: {
                         ":Nombre": body.Nombre,
+                        ":Soporte": body.Soporte,
                         ":UsuarioModificacion": body.Usuario,
                         ":FechaModificacion": getFechaHora
                     },
