@@ -24,7 +24,7 @@ module.exports = [
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
                         "Limit": 1000,
-                        "FilterExpression": "#DYNOBASE_Identificacion, :Identificacion",
+                        "FilterExpression": "#DYNOBASE_Identificacion = :Identificacion",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Identificacion": "Identificacion"
                         },
@@ -69,7 +69,7 @@ module.exports = [
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
                         "Limit": 360000,
-                        "FilterExpression": "contains(#DYNOBASE_Factura, :Factura) AND #DYNOBASE_Identificacion, :Identificacion",
+                        "FilterExpression": "contains(#DYNOBASE_Factura, :Factura) AND #DYNOBASE_Identificacion = :Identificacion",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Factura": "Factura",
                             "#DYNOBASE_Identificacion": "Identificacion"
@@ -127,7 +127,7 @@ module.exports = [
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
                         "Limit": 360000,
-                        "FilterExpression": "#DYNOBASE_Factura, :Factura AND #DYNOBASE_Identificacion, :Identificacion",
+                        "FilterExpression": "#DYNOBASE_Factura, :Factura AND #DYNOBASE_Identificacion = :Identificacion",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Factura": "Factura",
                             "#DYNOBASE_Identificacion": "Identificacion"
