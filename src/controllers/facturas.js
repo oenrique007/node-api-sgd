@@ -18,7 +18,7 @@ module.exports = [
                 var parametros = {};
                 let body = req.body;
 
-                if (Referencia != '') {
+                if (Referencia != "" || Referencia != undefined || Referencia != null) {
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
@@ -63,7 +63,7 @@ module.exports = [
                 let Filtro = req.body.Filtro;
                 let Referencia = req.body.Referencia;
 
-                if (Referencia != '') {
+                if (Referencia != "" || Referencia != undefined || Referencia != null) {
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
@@ -121,7 +121,7 @@ module.exports = [
                 let Factura = req.body.Codigo;
                 let Referencia = req.body.Referencia;
 
-                if (Referencia != '') {
+                if (Referencia != "" || Referencia != undefined || Referencia != null) {
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
