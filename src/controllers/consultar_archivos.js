@@ -14,7 +14,7 @@ module.exports = [
     {
         method: 'POST',
         path: `${pathDef}/obtener/ConsultarArchivos`,
-        description: 'Consultar los documentos asociados a un área',
+        description: 'Consultar los registros de transacciones de archivos',
         handler: function (req, res) {
             try {
                 let body = req.body;
@@ -27,34 +27,68 @@ module.exports = [
                 let Administradora = req.body.Administradora;
                 let UnidadFuncional = req.body.UnidadFuncional;
                 let NombreArchivo = req.body.NombreArchivo;
+                let Vista = req.body.Vista;
+                let Factura = req.body.Factura;
+                let Facturas = req.body.Facturas;
+                var parametros;
 
-                var parametros = {
-                    TableName: NombreTabla,
-                    "ScanIndexForward": true,
-                    FilterExpression: "#Fecha BETWEEN :FechaInicial AND :FechaFinal AND #Area = :Area AND #IdentificacionPte = :IdentificacionPte AND contains(#Admision, :Admision) AND contains(#Administradora, :Administradora) AND contains(#Documento, :Documento) AND contains(#UnidadFuncional, :UnidadFuncional) AND contains(#NombreArchivo, :NombreArchivo)",
-                    ExpressionAttributeNames: {
-                        "#Fecha": "FormatoFecha",
-                        "#Area": "CodigoArea",
-                        "#Documento": "CodigoDocumento",
-                        "#IdentificacionPte": "IdentificacionPte",
-                        "#Admision": "Admision",
-                        "#Administradora": "CodigoAdministradora",
-                        "#UnidadFuncional": "CodigoUF",
-                        "#NombreArchivo": "NombreArchivo"
-                    },
-                    ExpressionAttributeValues: {
-                        ":FechaInicial": FechaInicial,
-                        ":FechaFinal": FechaFinal,
-                        ":Area": Area,
-                        ":Documento": Documento,
-                        ":IdentificacionPte": IdPaciente,
-                        ":Admision": Admision,
-                        ":Administradora": Administradora,
-                        ":UnidadFuncional": UnidadFuncional,
-                        ":NombreArchivo": NombreArchivo,
-                    }
-                };
+                if (Vista == '2') { //por múltiples facturas
 
+                    var filterExpression = "Factura in (";
+                    var expressionAttributeValues = {};
+                    var contentIdName;
+                    var i = 0;
+
+                    Facturas.forEach(function (factura) {
+
+                        contentIdName = `:FacturaId${i}`;
+                        if (i == 0) {
+                            filterExpression += contentIdName;
+                        } else {
+                            filterExpression += `, ${contentIdName}`;
+                        }
+                        expressionAttributeValues[contentIdName] = factura;
+                        i++;
+                    });
+
+                    filterExpression += ")";
+
+                    parametros = {
+                        TableName: NombreTabla,
+                        FilterExpression: filterExpression,
+                        ExpressionAttributeValues: expressionAttributeValues
+                    };
+
+                } else {
+                    parametros = {
+                        TableName: NombreTabla,
+                        "ScanIndexForward": true,
+                        FilterExpression: "#Fecha BETWEEN :FechaInicial AND :FechaFinal AND #Area = :Area AND contains(#IdentificacionPte, :IdentificacionPte) AND contains(#Admision, :Admision) AND contains(#Administradora, :Administradora) AND contains(#Documento, :Documento) AND contains(#UnidadFuncional, :UnidadFuncional) AND contains(#NombreArchivo, :NombreArchivo) AND contains(#Factura, :Factura)",
+                        ExpressionAttributeNames: {
+                            "#Fecha": "FormatoFecha",
+                            "#Area": "CodigoArea",
+                            "#Documento": "CodigoDocumento",
+                            "#IdentificacionPte": "IdentificacionPte",
+                            "#Admision": "Admision",
+                            "#Administradora": "CodigoAdministradora",
+                            "#UnidadFuncional": "CodigoUF",
+                            "#NombreArchivo": "NombreArchivo",
+                            "#Factura": "Factura"
+                        },
+                        ExpressionAttributeValues: {
+                            ":FechaInicial": FechaInicial,
+                            ":FechaFinal": FechaFinal,
+                            ":Area": Area,
+                            ":Documento": Documento,
+                            ":IdentificacionPte": IdPaciente,
+                            ":Admision": Admision,
+                            ":Administradora": Administradora,
+                            ":UnidadFuncional": UnidadFuncional,
+                            ":NombreArchivo": NombreArchivo,
+                            ":Factura": Factura,
+                        }
+                    };
+                }
                 archivos.postConsultarScanDatos(parametros, function (error, data) {
                     if (error) {
                         res.status(500).jsonp({ mensaje: error });

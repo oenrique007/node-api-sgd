@@ -7,15 +7,6 @@ const moment = require('moment-timezone');
 var pathDef = "/api/archivos";
 var archivos = require('../models/modelogenerico');
 dotenv.config();
-//moment.tz.setDefault("America/Bogota");
-
-// const S3 = new AWS.S3({
-//     credentials: {
-//         region: process.env.AWS_REGION,
-//         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-//     }
-// });
 
 const S3 = new AWS.S3();
 
@@ -38,19 +29,19 @@ module.exports = [
         handler: function (req, res) {
             try {
 
-                //const BucketEstatico = "archivos-sistema-gdc";
                 let body = req.body;
                 let file = req.file;
-                //let BucketArea = BucketEstatico + "/" + req.body.BucketArea;
                 let Estructura = body.Estructura;
                 let IdentificacionPte = body.IdentificacionPte;
                 let NombrePaciente = body.NombrePaciente;
                 let Admision = body.Admision;
+                let Factura = body.Factura;
+                let TipoFactura = body.TipoFactura;
+                let ValorFactura = body.ValorFactura;
                 let Administradora = body.Administradora;
                 let Unidad_Funcional = body.UnidadFuncional;
                 let bucketDefinitivo = body.BucketDefinitivo;
-                //let Year = moment().format("YYYY");
-                //var Mes = moment().format('MMMM');
+
                 let getFechaHora = moment().tz("America/Bogota").format("YYYYMMDD HH_mm_ss");
 
                 let myFile = req.file.originalname.split(".");
@@ -58,14 +49,21 @@ module.exports = [
                 let fileNameComplete = req.file.originalname;
                 let BucketComplete = "";
 
+                // Por Facturas
                 if (body.Estructura == 3) {
-                    fileNameComplete = "DOC_" + IdentificacionPte + "_" + NombrePaciente + "_" + Administradora + "_" + getFechaHora + "." + fileType;
+                    let RenameAdministradora = Administradora.replace(/ /g, '_');
+                    let RenameNombrePaciente = NombrePaciente.replace(/ /g, '_');
+                    if (body.TipoFactura == 'I') {
+                        fileNameComplete = `${Factura}_${IdentificacionPte}_${RenameNombrePaciente}_${RenameAdministradora}.${fileType}`;
+                    } else {
+                        fileNameComplete = `${Factura}_${RenameAdministradora}.${fileType}`;
+                    }
+                    //fileNameComplete = "DOC_" + IdentificacionPte + "_" + NombrePaciente + "_" + Administradora + "_" + getFechaHora + "." + fileType;
                 }
 
                 const params = {
                     //ACL: "public-read-write",
-                    Bucket: body.BucketDefinitivo,//"archivos-sistema-gdc/admisiones/otro",
-                    //Key: `${uuid()}.${fileType}`, // nombre del archivo.
+                    Bucket: body.BucketDefinitivo,
                     Key: fileNameComplete,
                     Body: file.buffer
                 }
@@ -89,6 +87,9 @@ module.exports = [
                                 'IdentificacionPte': { S: `${body.IdentificacionPte}` },
                                 'NombrePaciente': { S: `${body.NombrePaciente}` },
                                 'Admision': { S: `${body.Admision}` },
+                                'Factura': { S: `${body.Factura}` },
+                                'TipoFactura': { S: `${body.TipoFactura}` },
+                                'ValorFactura': { S: `${body.ValorFactura}` },
                                 'CodigoAdministradora': { S: `${body.CodigoAdministradora}` },
                                 'Administradora': { S: `${body.Administradora}` },
                                 'CodigoUF': { S: `${body.CodigoUF}` },
@@ -108,6 +109,7 @@ module.exports = [
                         archivos.postInsertarDatos(parametros, function (error, data) {
                             if (error) {
                                 res.status(500).jsonp({ mensaje: error });
+                                console.log(error);
                             }
                             else {
                                 res.status(200).jsonp(data);
