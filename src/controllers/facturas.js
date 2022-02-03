@@ -23,7 +23,7 @@ module.exports = [
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
-                        "Limit": 1000,
+                        "Limit": 300000,
                         "FilterExpression": "#DYNOBASE_Identificacion = :Identificacion",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Identificacion": "Identificacion"
@@ -68,7 +68,7 @@ module.exports = [
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
-                        "Limit": 360000,
+                        "Limit": 300000,
                         "FilterExpression": "contains(#DYNOBASE_Factura, :Factura) AND #DYNOBASE_Identificacion = :Identificacion",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Factura": "Factura",
@@ -84,7 +84,7 @@ module.exports = [
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
-                        "Limit": 360000,
+                        "Limit": 300000,
                         "FilterExpression": "contains(#DYNOBASE_Factura, :Factura) OR contains(#DYNOBASE_Administradora, :Administradora)",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Factura": "Factura",
@@ -126,7 +126,7 @@ module.exports = [
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
-                        "Limit": 1000,
+                        "Limit": 300000,
                         "FilterExpression": "#DYNOBASE_Factura = :Factura AND #DYNOBASE_Identificacion = :Identificacion",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Factura": "Factura",
@@ -141,7 +141,7 @@ module.exports = [
                     parametros = {
                         "TableName": NombreTabla,
                         "ScanIndexForward": true,
-                        "Limit": 1000,
+                        "Limit": 300000,
                         "FilterExpression": "#DYNOBASE_Factura = :Factura",
                         "ExpressionAttributeNames": {
                             "#DYNOBASE_Factura": "Factura"

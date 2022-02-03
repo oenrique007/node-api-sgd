@@ -20,7 +20,7 @@ module.exports = [
                 var parametros = {
                     "TableName": NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 360000
+                    "Limit": 1000000
                 };
 
                 pacientes.postConsultarScanDatos(parametros, function (error, data) {
@@ -53,7 +53,7 @@ module.exports = [
                 var parametros = {
                     "TableName": NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 360000,
+                    "Limit": 1000000,
                     "FilterExpression": "contains(#DYNOBASE_Nombres, :Nombres) OR contains(#DYNOBASE_Identificacion, :Identificacion)",
                     "ExpressionAttributeNames": {
                         "#DYNOBASE_Nombres": "Nombres",
@@ -92,7 +92,7 @@ module.exports = [
                 var parametros = {
                     "TableName": NombreTabla,
                     "ScanIndexForward": true,
-                    "Limit": 360000,
+                    "Limit": 1000000,
                     "FilterExpression": "#DYNOBASE_Identificacion = :Identificacion",
                     "ExpressionAttributeNames": {
                         "#DYNOBASE_Identificacion": "Identificacion"
